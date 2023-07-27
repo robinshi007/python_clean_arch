@@ -1,7 +1,8 @@
 import os
 from typing import List
+
 from dotenv import load_dotenv
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from python_clean_arch.utils.common_utils import get_project_root
 
@@ -11,6 +12,9 @@ ENV: str = ""
 
 
 class Configs(BaseSettings):
+    model_config = SettingsConfigDict(
+        case_sensitive=True,
+    )
     # base
     ENV: str = os.getenv("ENV", "dev")
     PROJECT_NAME: str = "pca"
@@ -60,9 +64,6 @@ class Configs(BaseSettings):
     PAGE: int = 1
     PAGE_SIZE: int = 20
     ORDERING: str = "-id"
-
-    class Config:
-        case_sensitive = True
 
 
 class TestConfigs(Configs):
