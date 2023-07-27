@@ -118,6 +118,9 @@ class BaseRepository:
 
     def soft_delete_by_id(self, id: int) -> None:
         with self.session_factory() as session:
+            query = session.query(self.model).filter(self.model.id == id).first()
+            if not query:
+                raise NotFoundError(detail=f"not found id : {id}")
             session.query(self.model).filter(self.model.id == id).update(
                 {"deleted_at": now_ms()}
             )

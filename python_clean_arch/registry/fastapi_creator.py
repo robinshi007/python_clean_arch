@@ -37,6 +37,6 @@ class FastAPICreator:
             return {"status": "ok"}
 
         self.app.include_router(routers_v1, prefix=self.config.API_V1_STR)
-        # self.app.include_router(
-        #     router_graphql, prefix="/graphql", include_in_schema=True
-        # )
+        self.app.include_router(
+            router_graphql, prefix="/graphql", include_in_schema=True
+        )

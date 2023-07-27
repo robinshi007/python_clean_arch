@@ -13,7 +13,7 @@ class Query:
     async def users(self, info: Info) -> List[UserSchema]:
         user_usecase = get_user_usecase(info)
         res = user_usecase.get_list(FindBase())
-        return [UserSchema(**d) for d in res["founds"]]
+        return res["founds"]
 
     @strawberry.field(description="Get an user")
     async def user(self, id: int, info: Info) -> UserSchema:

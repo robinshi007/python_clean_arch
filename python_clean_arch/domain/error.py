@@ -21,6 +21,7 @@ class NotFoundError(HTTPException):
     def __init__(
         self, detail: Any = None, headers: Optional[Dict[str, Any]] = None
     ) -> None:
+        self.args = (detail,)
         super().__init__(status.HTTP_404_NOT_FOUND, detail, headers)
 
 
